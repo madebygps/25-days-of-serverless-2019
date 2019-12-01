@@ -9,7 +9,7 @@ Let's talk on socials! 🤖
 
 I'm hoping to get all 25 challenges done! I'll track my progress in this list.
 
-| Day
+| Day  | Solved |
 |---|:---:|
-| [1: Spin the Dreidel!](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_01)| | 
+| [1: Spin the Dreidel!](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_01)| 👍🏽| 
 
