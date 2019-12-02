@@ -1,4 +1,4 @@
-# Challenge 2: TASK SCHEDULER
+# Challenge 2: Task scheduler
 
 [Description of challenge](https://25daysofserverless.com/calendar/2)
 
