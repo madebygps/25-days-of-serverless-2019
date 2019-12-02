@@ -5,3 +5,8 @@
 
 Create a task scheduler that will tell Lucy exactly when she should relight candles, pour coffee into cups, and deliver batches of coffee.
 
+I used Azure Logic apps for this.
+
+[Solution](https://25daysofserverless.com/calendar/2)
+
+![Logic app](logicapp.png "Title")
