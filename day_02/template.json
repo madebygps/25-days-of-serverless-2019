@@ -1,0 +1,329 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_day02_201925daysofserverless_name": {
+            "defaultValue": "day02-201925daysofserverless",
+            "type": "String"
+        },
+        "connections_outlook_externalid": {
+            "defaultValue": "/subscriptions/cff6cefb-141c-4d00-8b0a-578685211f9c/resourceGroups/25daysofserverless-rg/providers/Microsoft.Web/connections/outlook",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_day02_201925daysofserverless_name')]",
+            "location": "eastus2",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "Recurrence": {
+                            "recurrence": {
+                                "frequency": "Day",
+                                "interval": 1
+                            },
+                            "type": "Recurrence"
+                        }
+                    },
+                    "actions": {
+                        "Delay": {
+                            "runAfter": {
+                                "Send_an_email": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Wait",
+                            "inputs": {
+                                "interval": {
+                                    "count": 25,
+                                    "unit": "Minute"
+                                }
+                            }
+                        },
+                        "Delay_2": {
+                            "runAfter": {
+                                "Send_an_email_2": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Wait",
+                            "inputs": {
+                                "interval": {
+                                    "count": 5,
+                                    "unit": "Minute"
+                                }
+                            }
+                        },
+                        "Delay_3": {
+                            "runAfter": {
+                                "Send_an_email_3": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Wait",
+                            "inputs": {
+                                "interval": {
+                                    "count": 5,
+                                    "unit": "Minute"
+                                }
+                            }
+                        },
+                        "Delay_4": {
+                            "runAfter": {
+                                "Send_an_email_4": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Wait",
+                            "inputs": {
+                                "interval": {
+                                    "count": 4,
+                                    "unit": "Minute"
+                                }
+                            }
+                        },
+                        "Delay_5": {
+                            "runAfter": {
+                                "Send_an_email_5": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Wait",
+                            "inputs": {
+                                "interval": {
+                                    "count": 1,
+                                    "unit": "Minute"
+                                }
+                            }
+                        },
+                        "Delay_6": {
+                            "runAfter": {
+                                "Send_an_email_6": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Wait",
+                            "inputs": {
+                                "interval": {
+                                    "count": 5,
+                                    "unit": "Minute"
+                                }
+                            }
+                        },
+                        "Delay_7": {
+                            "runAfter": {
+                                "Send_an_email_7": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Wait",
+                            "inputs": {
+                                "interval": {
+                                    "count": 4,
+                                    "unit": "Minute"
+                                }
+                            }
+                        },
+                        "Send_an_email": {
+                            "runAfter": {},
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "Body": "Start the coffee, set out 4 cups.",
+                                    "Subject": "☕️ Start the coffee, set out 4 cups.",
+                                    "To": "gwynethpena@outlook.com"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['outlook']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/Mail"
+                            }
+                        },
+                        "Send_an_email_2": {
+                            "runAfter": {
+                                "Delay": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "Body": "pour two cups",
+                                    "Subject": "☕️ pour two cups",
+                                    "To": "gwynethpena@outlook.com"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['outlook']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/Mail"
+                            }
+                        },
+                        "Send_an_email_3": {
+                            "runAfter": {
+                                "Delay_2": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "Body": "light the candles",
+                                    "Subject": "🕯light the candles",
+                                    "To": "gwynethpena@outlook.com"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['outlook']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/Mail"
+                            }
+                        },
+                        "Send_an_email_4": {
+                            "runAfter": {
+                                "Delay_3": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "Body": "deliver the coffee to Mom and Dad",
+                                    "Subject": "☕️ deliver the coffee to Mom and Dad",
+                                    "To": "gwynethpena@outlook.com"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['outlook']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/Mail"
+                            }
+                        },
+                        "Send_an_email_5": {
+                            "runAfter": {
+                                "Delay_4": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "Body": "return to kitchen, fill two more cups",
+                                    "Subject": "☕️ return to kitchen, fill two more cups",
+                                    "To": "gwynethpena@outlook.com"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['outlook']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/Mail"
+                            }
+                        },
+                        "Send_an_email_6": {
+                            "runAfter": {
+                                "Delay_5": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "Body": "relight the candles",
+                                    "Subject": "🕯relight the candles",
+                                    "To": "gwynethpena@outlook.com"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['outlook']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/Mail"
+                            }
+                        },
+                        "Send_an_email_7": {
+                            "runAfter": {
+                                "Delay_6": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "Body": "deliver the coffee to Sister and Brother",
+                                    "Subject": "☕️ deliver the coffee to Sister and Brother",
+                                    "To": "gwynethpena@outlook.com"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['outlook']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/Mail"
+                            }
+                        },
+                        "Send_an_email_8": {
+                            "runAfter": {
+                                "Delay_7": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "Body": "return to kitchen, take a break!",
+                                    "Subject": "👍🏽 return to kitchen, take a break!",
+                                    "To": "gwynethpena@outlook.com"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['outlook']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/Mail"
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "outlook": {
+                                "connectionId": "[parameters('connections_outlook_externalid')]",
+                                "connectionName": "outlook",
+                                "id": "/subscriptions/cff6cefb-141c-4d00-8b0a-578685211f9c/providers/Microsoft.Web/locations/eastus2/managedApis/outlook"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

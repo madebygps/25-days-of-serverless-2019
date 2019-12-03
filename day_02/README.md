@@ -7,7 +7,8 @@ Create a task scheduler that will tell Lucy exactly when she should relight cand
 
 
 
-[Solution](https://github.com/madebygps/25-days-of-serverless-2019/blob/master/day_02/day_02_logicapp_template.json)
+[Solution template](https://github.com/madebygps/25-days-of-serverless-2019/blob/master/day_02/template.json)
+[Solution parameters](https://github.com/madebygps/25-days-of-serverless-2019/blob/master/day_02/parameters.json)
 
 I used Azure Logic apps for this. This is what the workflow looks like. 
 
