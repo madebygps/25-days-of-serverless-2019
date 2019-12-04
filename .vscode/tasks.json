@@ -12,7 +12,7 @@
             "type": "process",
             "problemMatcher": "$msCompile",
             "options": {
-                "cwd": "${workspaceFolder}/day_03"
+                "cwd": "${workspaceFolder}/day_04"
             }
         },
         {
@@ -31,7 +31,7 @@
             },
             "problemMatcher": "$msCompile",
             "options": {
-                "cwd": "${workspaceFolder}/day_03"
+                "cwd": "${workspaceFolder}/day_04"
             }
         },
         {
@@ -47,7 +47,7 @@
             "type": "process",
             "problemMatcher": "$msCompile",
             "options": {
-                "cwd": "${workspaceFolder}/day_03"
+                "cwd": "${workspaceFolder}/day_04"
             }
         },
         {
@@ -64,14 +64,14 @@
             "dependsOn": "clean release",
             "problemMatcher": "$msCompile",
             "options": {
-                "cwd": "${workspaceFolder}/day_03"
+                "cwd": "${workspaceFolder}/day_04"
             }
         },
         {
             "type": "func",
             "dependsOn": "build",
             "options": {
-                "cwd": "${workspaceFolder}/day_03/bin/Debug/netcoreapp2.1"
+                "cwd": "${workspaceFolder}/day_04/bin/Debug/netcoreapp2.1"
             },
             "command": "host start",
             "isBackground": true,
