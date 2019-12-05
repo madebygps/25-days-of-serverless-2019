@@ -4,6 +4,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
 
 // https://kevsoft.net/2019/02/24/using-mongodb-and-azure-functions.html
 
@@ -13,13 +14,13 @@ namespace GwynethPena.Function
     {
         [FunctionName("day_04_25daysofserverless2019")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "companies")] Company company, HttpRequest req,
-            [Kevsoft.Azure.WebJobs.MongoDb("test", "companies", ConnectionStringSetting = "MongoDbUrl")] IAsyncCollector<Company> companies,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "potluckdishes")] PotluckDish dish, HttpRequest req,
+            [Kevsoft.Azure.WebJobs.MongoDb("potluck", "dishes", ConnectionStringSetting = "MongoDbUrl")] IAsyncCollector<PotluckDish> dishes,
             ILogger log)
         {
-            await companies.AddAsync(company);
-
-            return new OkObjectResult($"Created company '{company.Name}' with an id of '{company.Id}'");
+            await dishes.AddAsync(dish);
+        
+            return new OkObjectResult($"Created dish '{dish.Name}' with an id of '{dish.Id}' will be brought by'{dish.FriendName}', please make note of ID so you can delete dish if needed later");
         }
     }
 }

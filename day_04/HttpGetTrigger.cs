@@ -11,11 +11,11 @@ namespace day_04
     {
         [FunctionName("HttpGetTrigger")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = @"companies/{id}")] HttpRequest req,
-            [Kevsoft.Azure.WebJobs.MongoDb("test", "companies", "{id}", ReadOnly = true, ConnectionStringSetting = "MongoDbUrl")] Company company
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = @"potluckdishes/{id}")] HttpRequest req,
+            [Kevsoft.Azure.WebJobs.MongoDb("potluck", "dishes", "{id}", ReadOnly = true, ConnectionStringSetting = "MongoDbUrl")] PotluckDish dish
             )
         {
-            return new OkObjectResult(company);
+            return new OkObjectResult(dish);
         }
     }
 }
