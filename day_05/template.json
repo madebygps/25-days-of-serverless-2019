@@ -1,0 +1,197 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_day_05_25daysofserverless2019_name": {
+            "defaultValue": "day-05-25daysofserverless2019",
+            "type": "String"
+        },
+        "connections_cognitiveservicestextanalytics_1_externalid": {
+            "defaultValue": "/subscriptions/cff6cefb-141c-4d00-8b0a-578685211f9c/resourceGroups/25daysofserverless-rg/providers/Microsoft.Web/connections/cognitiveservicestextanalytics-1",
+            "type": "String"
+        },
+        "connections_translatorv2_externalid": {
+            "defaultValue": "/subscriptions/cff6cefb-141c-4d00-8b0a-578685211f9c/resourceGroups/25daysofserverless-rg/providers/Microsoft.Web/connections/translatorv2",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_day_05_25daysofserverless2019_name')]",
+            "location": "eastus2",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "manual": {
+                            "type": "Request",
+                            "kind": "Http",
+                            "inputs": {
+                                "method": "POST",
+                                "schema": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "who": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "who",
+                                            "message"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "actions": {
+                        "For_each": {
+                            "foreach": "@triggerBody()",
+                            "actions": {
+                                "Append_to_array_variable": {
+                                    "runAfter": {
+                                        "Detect_Sentiment": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "AppendToArrayVariable",
+                                    "inputs": {
+                                        "name": "messageArray",
+                                        "value": {
+                                            "is": "@if(greater(float(body('Detect_Sentiment')?['score']), float('0.5')), 'nice', 'naughty')\n",
+                                            "who": "@items('For_each')['who']"
+                                        }
+                                    }
+                                },
+                                "Detect_Sentiment": {
+                                    "runAfter": {
+                                        "Translate_text": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "language": "en",
+                                            "text": "@body('Translate_text')"
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['cognitiveservicestextanalytics']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "path": "/text/analytics/v2.1/sentiment"
+                                    }
+                                },
+                                "Detect_language": {
+                                    "runAfter": {},
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "Text": "@items('For_each')?['message']"
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['translatorv2_1']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "path": "/Detect"
+                                    }
+                                },
+                                "Translate_text": {
+                                    "runAfter": {
+                                        "Detect_language": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "Text": "@items('For_each')?['message']"
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['translatorv2_1']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "path": "/Translate",
+                                        "queries": {
+                                            "to": "en"
+                                        }
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "Initialize_variable": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Foreach"
+                        },
+                        "Initialize_variable": {
+                            "runAfter": {},
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "messageArray",
+                                        "type": "array"
+                                    }
+                                ]
+                            }
+                        },
+                        "Response": {
+                            "runAfter": {
+                                "For_each": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Response",
+                            "kind": "Http",
+                            "inputs": {
+                                "body": "@variables('messageArray')",
+                                "statusCode": 200
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "cognitiveservicestextanalytics": {
+                                "connectionId": "[parameters('connections_cognitiveservicestextanalytics_1_externalid')]",
+                                "connectionName": "cognitiveservicestextanalytics-1",
+                                "id": "/subscriptions/cff6cefb-141c-4d00-8b0a-578685211f9c/providers/Microsoft.Web/locations/eastus2/managedApis/cognitiveservicestextanalytics"
+                            },
+                            "translatorv2_1": {
+                                "connectionId": "[parameters('connections_translatorv2_externalid')]",
+                                "connectionName": "translatorv2",
+                                "id": "/subscriptions/cff6cefb-141c-4d00-8b0a-578685211f9c/providers/Microsoft.Web/locations/eastus2/managedApis/translatorv2"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
