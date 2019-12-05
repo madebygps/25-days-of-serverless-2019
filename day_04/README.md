@@ -35,4 +35,4 @@ To remove a dish, please simply visit this URL.
 
 ## Demo
 
-![Demo](day_04_demo.gif "Demo")
+![Demo](day_04_demo.GIF "Demo")
