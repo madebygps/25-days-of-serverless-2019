@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 
-// https://kevsoft.net/2019/02/24/using-mongodb-and-azure-functions.html
+
 
 namespace GwynethPena.Function
 {

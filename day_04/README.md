@@ -7,7 +7,7 @@ Build an HTTP API that lets Ezra's friends add food dishes they want to bring to
 
 ## Solution 
 
-I created a few Azure Functions for the API endpoints. All connected to a [free tier MongoDB Atlas culster](https://azure.microsoft.com/en-us/blog/microsoft-azure-tutorial-how-to-integrate-azure-functions-with-mongodb/) that is deployed on Azure.
+I created a few Azure Functions for the API endpoints. All connected to a [free tier MongoDB Atlas culster](https://azure.microsoft.com/en-us/blog/microsoft-azure-tutorial-how-to-integrate-azure-functions-with-mongodb/) that is deployed on Azure. [MongoDB Azure Function Bindings](https://www.nuget.org/packages/Kevsoft.Azure.WebJobs.Extensions.MongoDB/).
 
 ### View all dishes
 
