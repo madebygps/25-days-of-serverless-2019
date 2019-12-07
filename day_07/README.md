@@ -6,7 +6,7 @@ Let's help Miguel by building a web API that lets his neighbors search for image
 
 ## Solution 
 
-I created a few Azure Functions where you can submit a searchTerm and an image url is returned. The function uses the Bing Image Search SDK for C# and Azure keyvault for added security.
+I created a few Azure Functions where you can submit a searchTerm and an image url is returned. The function uses the [Bing Image Search SDK for C#](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-image-search/image-search-sdk-quickstart) and [Azure keyvault](https://docs.microsoft.com/en-us/azure/app-service/app-service-key-vault-references) for added security.
 
 
 ### Search for image
