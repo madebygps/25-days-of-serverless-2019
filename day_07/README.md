@@ -17,3 +17,5 @@ To search for an image, send json to https://day-07-25daysofserverless-2019.azur
     "searchTerm":"image search term"
 } 
 ```
+
+![Demo](demo_07.png "Demo")
