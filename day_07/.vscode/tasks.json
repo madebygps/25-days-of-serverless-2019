@@ -10,10 +10,7 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "type": "process",
-            "problemMatcher": "$msCompile",
-            "options": {
-                "cwd": "${workspaceFolder}/day_05"
-            }
+            "problemMatcher": "$msCompile"
         },
         {
             "label": "build",
@@ -29,10 +26,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": "$msCompile",
-            "options": {
-                "cwd": "${workspaceFolder}/day_05"
-            }
+            "problemMatcher": "$msCompile"
         },
         {
             "label": "clean release",
@@ -45,10 +39,7 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "type": "process",
-            "problemMatcher": "$msCompile",
-            "options": {
-                "cwd": "${workspaceFolder}/day_05"
-            }
+            "problemMatcher": "$msCompile"
         },
         {
             "label": "publish",
@@ -62,37 +53,17 @@
             ],
             "type": "process",
             "dependsOn": "clean release",
-            "problemMatcher": "$msCompile",
-            "options": {
-                "cwd": "${workspaceFolder}/day_05"
-            }
+            "problemMatcher": "$msCompile"
         },
         {
             "type": "func",
+            "dependsOn": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/bin/Debug/netcoreapp2.1"
+            },
             "command": "host start",
-            "problemMatcher": "$func-watch",
             "isBackground": true,
-            "dependsOn": "npm install",
-            "options": {
-                "cwd": "${workspaceFolder}/day_06"
-            }
-        },
-        {
-            "type": "shell",
-            "label": "npm install",
-            "command": "npm install",
-            "options": {
-                "cwd": "${workspaceFolder}/day_06"
-            }
-        },
-        {
-            "type": "shell",
-            "label": "npm prune",
-            "command": "npm prune --production",
-            "problemMatcher": [],
-            "options": {
-                "cwd": "${workspaceFolder}/day_06"
-            }
+            "problemMatcher": "$func-watch"
         }
     ]
 }

@@ -13,8 +13,11 @@ I'm hoping to get all 25 challenges done! I'll track my progress in this list.
 
 | Day  | Solved |
 |---|:---:|
-| [1: Spin the Dreidel!](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_01)| 👍🏽| 
-| [2: Lucy's Dilemma](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_02)| 👍🏽|
-| [3: Secret Santa's Furry Friends](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_03)| 👍🏽| 
-| [4: Ezra's Potluck](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_04)| 👍🏽|
+| [1: A BASIC FUNCTION](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_01)| 👍🏽| 
+| [2: TASK SCHEDULER](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_02)| 👍🏽|
+| [3: WEBHOOKS](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_03)| 👍🏽| 
+| [4: API ENDPOINT](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_04)| 👍🏽|
+| [5: SMART APPS](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_05)| 👍🏽|
+| [6: DURABLE PATTERN](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_06)| |
+| [7: API ENDPOINT - PICTURE](https://github.com/madebygps/25-days-of-serverless-2019/tree/master/day_07)| 👍🏽|
 

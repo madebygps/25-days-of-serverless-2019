@@ -1,8 +1,8 @@
 {
-    "azureFunctions.deploySubpath": "day_04/bin/Release/netcoreapp2.1/publish",
-    "azureFunctions.projectLanguage": "C#",
+    "azureFunctions.deploySubpath": "day_06",
+    "azureFunctions.projectLanguage": "JavaScript",
     "azureFunctions.projectRuntime": "~2",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "publish",
+    "azureFunctions.preDeployTask": "npm prune",
     "azureFunctions.projectSubpath": "day_03"
 }
